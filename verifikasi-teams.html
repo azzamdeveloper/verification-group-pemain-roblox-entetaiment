@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verifikasi Anggota — Roblox Teams by Azzam Entertainment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d1117;
+    --panel:#151b26;
+    --panel-2:#1c2433;
+    --line:#2a3446;
+    --text:#e8ecf3;
+    --muted:#8b98ac;
+    --accent:#5ee6c8;
+    --accent-2:#7c8cff;
+    --danger:#ff6b6b;
+    --font-head:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+  }
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+  }
+  :root[data-theme="light"]{
+    --bg:#f3f5f9;
+    --panel:#ffffff;
+    --panel-2:#eef1f6;
+    --line:#dbe1ea;
+    --text:#151b26;
+    --muted:#5c6779;
+    --accent:#12977f;
+    --accent-2:#4a55c9;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#f3f5f9;
+      --panel:#ffffff;
+      --panel-2:#eef1f6;
+      --line:#dbe1ea;
+      --text:#151b26;
+      --muted:#5c6779;
+      --accent:#12977f;
+      --accent-2:#4a55c9;
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:32px 16px 64px;
+  }
+  .wrap{
+    width:100%;
+    max-width:520px;
+  }
+  .brand{
+    text-align:center;
+    margin-bottom:22px;
+  }
+  .brand .mark{
+    font-family:var(--font-head);
+    font-weight:700;
+    font-size:1.05rem;
+    letter-spacing:.01em;
+  }
+  .brand .mark span{color:var(--accent);}
+  .brand .sub{
+    color:var(--muted);
+    font-size:.85rem;
+    margin-top:4px;
+  }
+
+  .steps{
+    display:flex;
+    gap:8px;
+    margin-bottom:26px;
+  }
+  .step-dot{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    align-items:center;
+  }
+  .dot-line{
+    width:100%;
+    height:4px;
+    border-radius:4px;
+    background:var(--line);
+    overflow:hidden;
+  }
+  .dot-line i{
+    display:block;
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    transition:width .35s ease;
+  }
+  .dot-label{
+    font-size:.68rem;
+    color:var(--muted);
+    text-align:center;
+    line-height:1.3;
+  }
+  .step-dot.active .dot-label{color:var(--text);font-weight:600;}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:28px 24px;
+  }
+  .stage-tag{
+    display:inline-block;
+    font-size:.78rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  h1{
+    font-family:var(--font-head);
+    font-size:1.4rem;
+    margin:0 0 8px;
+  }
+  p.desc{
+    color:var(--muted);
+    font-size:.9rem;
+    line-height:1.55;
+    margin:0 0 20px;
+  }
+  label{
+    display:block;
+    font-size:.82rem;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  input[type="text"], input[type="tel"], input[type="email"], select{
+    width:100%;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    color:var(--text);
+    padding:12px 14px;
+    border-radius:10px;
+    font-size:.95rem;
+    font-family:var(--font-body);
+    margin-bottom:16px;
+  }
+  input:focus, select:focus{
+    outline:2px solid var(--accent);
+    outline-offset:1px;
+  }
+  .row2{
+    display:grid;
+    grid-template-columns:1fr 1.4fr;
+    gap:10px;
+  }
+  .trust-list{
+    list-style:none;
+    padding:0;
+    margin:0 0 20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .trust-list li{
+    display:flex;
+    gap:10px;
+    font-size:.88rem;
+    color:var(--text);
+    line-height:1.5;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    padding:12px 14px;
+    border-radius:10px;
+  }
+  .trust-list li .dot{
+    color:var(--accent);
+    flex-shrink:0;
+  }
+  .agree{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:.85rem;
+    color:var(--muted);
+    margin-bottom:20px;
+  }
+  .agree input{width:auto;margin:2px 0 0;}
+
+  button.primary{
+    width:100%;
+    background:var(--accent);
+    color:#06231c;
+    border:none;
+    padding:13px 16px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:.95rem;
+    cursor:pointer;
+    font-family:var(--font-body);
+  }
+  :root[data-theme="light"] button.primary, body button.primary{color:#06231c;}
+  button.primary:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+  }
+  button.ghost{
+    width:100%;
+    background:transparent;
+    color:var(--muted);
+    border:1px solid var(--line);
+    padding:11px 16px;
+    border-radius:10px;
+    font-size:.88rem;
+    margin-top:10px;
+    cursor:pointer;
+    font-family:var(--font-body);
+  }
+  .err{
+    color:var(--danger);
+    font-size:.82rem;
+    margin:-8px 0 14px;
+    display:none;
+  }
+  .success-box{
+    text-align:center;
+    padding:8px 0 4px;
+  }
+  .success-box .icon{
+    width:56px;height:56px;
+    border-radius:50%;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 18px;
+    font-size:1.5rem;
+  }
+  .note-box{
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+    font-size:.85rem;
+    color:var(--text);
+    line-height:1.6;
+    margin:16px 0 22px;
+    text-align:left;
+  }
+  .note-box b{color:var(--accent);}
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:.75rem;
+    margin-top:22px;
+    line-height:1.5;
+  }
+  .final-key{
+    background:var(--panel-2);
+    border:1px dashed var(--accent);
+    border-radius:10px;
+    padding:14px;
+    font-family:monospace;
+    font-size:.85rem;
+    word-break:break-all;
+    margin:16px 0;
+    text-align:left;
+  }
+  .final-key div{margin-bottom:8px;}
+  .final-key span{color:var(--muted);display:block;font-family:var(--font-body);font-size:.72rem;margin-bottom:2px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brand">
+    <div class="mark">Roblox Teams <span>Entertainment</span> · by Azzam Entertainment</div>
+    <div class="sub">Verifikasi anggota tim</div>
+  </div>
+
+  <div class="steps" id="stepsBar">
+    <div class="step-dot" data-i="1"><div class="dot-line"><i></i></div><div class="dot-label">No. HP</div></div>
+    <div class="step-dot" data-i="2"><div class="dot-line"><i></i></div><div class="dot-label">Email</div></div>
+    <div class="step-dot" data-i="3"><div class="dot-line"><i></i></div><div class="dot-label">Kepercayaan</div></div>
+    <div class="step-dot" data-i="4"><div class="dot-line"><i></i></div><div class="dot-label">Selesai</div></div>
+  </div>
+
+  <div class="card">
+
+    <!-- STEP 1 -->
+    <section id="step1">
+      <span class="stage-tag">Tahap 1 dari 4</span>
+      <h1>Verifikasi nomor HP</h1>
+      <p class="desc">Masukkan nomor HP aktif yang terhubung dengan akunmu di tim. Ini membantu kami memastikan setiap anggota terdaftar dengan datanya sendiri, bukan atas nama orang lain.</p>
+      <label for="phone">Nomor HP</label>
+      <input type="tel" id="phone" placeholder="08xxxxxxxxxx">
+      <div class="err" id="err1">Isi dulu nomor HP kamu ya.</div>
+      <button class="primary" onclick="goStep(2, validatePhone)">Lanjut ke verifikasi email</button>
+    </section>
+
+    <!-- STEP 2 -->
+    <section id="step2" style="display:none">
+      <span class="stage-tag">Tahap 2 dari 4</span>
+      <h1>Verifikasi email</h1>
+      <p class="desc">Pilih penyedia email dan masukkan alamat email aktifmu. Kami tidak menerima email palsu atau email pinjaman milik orang lain.</p>
+      <label for="provider">Penyedia email</label>
+      <select id="provider">
+        <option value="gmail">Gmail</option>
+        <option value="outlook">Outlook</option>
+        <option value="lainnya">Lainnya</option>
+      </select>
+      <label for="email">Alamat email</label>
+      <input type="email" id="email" placeholder="namakamu@email.com">
+      <div class="err" id="err2">Masukkan alamat email yang valid.</div>
+      <button class="primary" onclick="goStep(3, validateEmail)">Lanjut ke bangun kepercayaan</button>
+      <button class="ghost" onclick="goStep(1)">Kembali</button>
+    </section>
+
+    <!-- STEP 3 -->
+    <section id="step3" style="display:none">
+      <span class="stage-tag">Tahap 3 dari 4</span>
+      <h1>Bangun kepercayaan</h1>
+      <p class="desc">Sebelum lanjut, kami minta kamu membaca dan menyetujui prinsip tim ini:</p>
+      <ul class="trust-list">
+        <li><span class="dot">●</span> Tidak ada yang boleh mendaftarkan temannya sendiri atas nama pihak lain.</li>
+        <li><span class="dot">●</span> Data yang didaftarkan harus milik sendiri, bukan email atau nomor palsu.</li>
+        <li><span class="dot">●</span> Karya dan hasil kerja anggota tim dihargai — dilarang keras diejek atau dicuri.</li>
+        <li><span class="dot">●</span> Owner dan pengurus tim bertindak jujur dan terbuka, sesuai aturan grup.</li>
+      </ul>
+      <label class="agree">
+        <input type="checkbox" id="agreeBox">
+        <span>Saya membaca dan menyetujui prinsip di atas, dan menyatakan data yang saya isi adalah benar milik saya.</span>
+      </label>
+      <div class="err" id="err3">Centang dulu persetujuannya ya.</div>
+      <button class="primary" onclick="goStep(4, validateTrust)">Lanjut ke tahap akhir</button>
+      <button class="ghost" onclick="goStep(2)">Kembali</button>
+    </section>
+
+    <!-- STEP 4a: press done -->
+    <section id="step4" style="display:none">
+      <span class="stage-tag">Tahap 4 dari 4</span>
+      <h1>Selesai verifikasi</h1>
+      <p class="desc">Kalau semua data di atas sudah benar, tekan tombol di bawah untuk menyelesaikan proses verifikasi.</p>
+      <button class="primary" onclick="showThanks()">Done</button>
+      <button class="ghost" onclick="goStep(3)">Kembali</button>
+    </section>
+
+    <!-- STEP 4b: thank you -->
+    <section id="stepThanks" style="display:none">
+      <div class="success-box">
+        <div class="icon">✅</div>
+        <h1>Terima kasih, verifikasi berhasil</h1>
+        <div class="note-box">
+          Mohon minta <b>owner</b> untuk mengambilkan code/key di akun WhatsApp dia — <b>secara private, jangan publik.</b>
+        </div>
+        <button class="primary" onclick="goStep('keyform')">Selanjutnya</button>
+      </div>
+    </section>
+
+    <!-- STEP: input key/code -->
+    <section id="stepKeyform" style="display:none">
+      <span class="stage-tag">Masukkan code/key</span>
+      <h1>Kode akses tim</h1>
+      <p class="desc">Masukkan code dan key yang sudah kamu terima dari owner secara private.</p>
+      <label for="codeInput">Code</label>
+      <input type="text" id="codeInput" placeholder="Masukkan code">
+      <label for="keyInput">Key</label>
+      <input type="text" id="keyInput" placeholder="Masukkan key">
+      <div class="err" id="errKey">Code atau key belum sesuai. Cek lagi ke owner ya.</div>
+      <button class="primary" onclick="checkKey()">Verifikasi code/key</button>
+    </section>
+
+    <!-- FINAL SUCCESS -->
+    <section id="stepFinal" style="display:none">
+      <div class="success-box">
+        <div class="icon">🔓</div>
+        <h1>Akses dikonfirmasi</h1>
+        <p class="desc">Code dan key kamu sudah cocok. Kamu resmi terverifikasi sebagai anggota tim.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>Roblox Teams Entertainment · by Azzam Entertainment<br>Jaga kejujuran data — ini untuk kebaikan semua anggota tim.</footer>
+</div>
+
+<script>
+  const CODE = "20290617";
+  const KEY  = "communityrobloxteamsbyazzamentertaiment";
+
+  const sections = ["step1","step2","step3","step4","stepThanks","stepKeyform","stepFinal"];
+  const stepBarMap = { step1:1, step2:2, step3:3, step4:4, stepThanks:4, stepKeyform:4, stepFinal:4 };
+
+  function showSection(id){
+    sections.forEach(s=>{
+      document.getElementById(s).style.display = (s===id) ? "block" : "none";
+    });
+    updateBar(stepBarMap[id] || 1);
+  }
+
+  function updateBar(n){
+    document.querySelectorAll('.step-dot').forEach(dot=>{
+      const i = parseInt(dot.dataset.i,10);
+      const fill = dot.querySelector('.dot-line i');
+      dot.classList.toggle('active', i<=n);
+      fill.style.width = (i<=n) ? "100%" : "0%";
+    });
+  }
+
+  function validatePhone(){
+    const v = document.getElementById('phone').value.trim();
+    document.getElementById('err1').style.display = v ? "none" : "block";
+    return !!v;
+  }
+  function validateEmail(){
+    const v = document.getElementById('email').value.trim();
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    document.getElementById('err2').style.display = ok ? "none" : "block";
+    return ok;
+  }
+  function validateTrust(){
+    const ok = document.getElementById('agreeBox').checked;
+    document.getElementById('err3').style.display = ok ? "none" : "block";
+    return ok;
+  }
+
+  function goStep(target, validateFn){
+    if(validateFn && !validateFn()) return;
+    if(target === 1) showSection('step1');
+    else if(target === 2) showSection('step2');
+    else if(target === 3) showSection('step3');
+    else if(target === 4) showSection('step4');
+    else if(target === 'keyform') showSection('stepKeyform');
+  }
+
+  function showThanks(){
+    showSection('stepThanks');
+  }
+
+  function checkKey(){
+    const c = document.getElementById('codeInput').value.trim();
+    const k = document.getElementById('keyInput').value.trim().toLowerCase();
+    const ok = (c === CODE) && (k === KEY.toLowerCase());
+    document.getElementById('errKey').style.display = ok ? "none" : "block";
+    if(ok) showSection('stepFinal');
+  }
+
+  showSection('step1');
+</script>
+</body>
+</html>
